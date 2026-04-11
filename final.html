@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetSphere</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= OPENING PAGE ================= -->
+<div id="homePage" class="page active">
+
+  <div class="overlay"></div>
+
+  <div class="top-bar">
+    <div class="icon-btn">←</div>
+    <div class="icon-btn">≡</div>
+  </div>
+
+  <div class="logo">
+    <img src="logo.png.png" alt="">
+  </div>
+
+  <div class="content">
+    <h1>Discover</h1>
+    <h1>Connection</h1>
+    <h1>Experience</h1>
+
+    <div class="arrow">→</div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn" onclick="showLogin()">LOG IN</button>
+    <button class="btn" onclick="showSignup()">Create Your Account</button>
+  </div>
+
+</div>
+
+<!-- ================= LOGIN PAGE ================= -->
+<div id="loginPage" class="page">
+
+  <div class="overlay"></div>
+
+  <div class="menu-btn">≡</div>
+
+  <div class="form-box">
+    <img src="logo.png.png" class="form-logo">
+
+    <h2>SIGN IN</h2>
+
+    <input type="text" placeholder="User Name">
+    <input type="password" placeholder="Password">
+
+    <p class="link">Forget Password</p>
+
+    <button class="btn main-btn" onclick="handleLogin()">SIGN IN</button>
+
+    <p class="bottom-text">
+      Don't have an account ?
+      <span onclick="showSignup()">Sign Up Here</span>
+    </p>
+  </div>
+
+</div>
+
+<!-- ================= SIGNUP PAGE ================= -->
+<div id="signupPage" class="page">
+
+  <div class="overlay"></div>
+
+  <div class="menu-btn">≡</div>
+
+  <div class="form-box">
+    <img src="logo.png.png" class="form-logo">
+
+    <h2>SIGN UP</h2>
+    <p class="subtitle">Create Your Account Here !</p>
+
+    <input type="text" placeholder="User Name">
+    <input type="email" placeholder="E-Mail ID">
+    <input type="text" placeholder="Mobile No.">
+    <input type="password" placeholder="Password">
+
+    <button class="btn main-btn" onclick="handleSignup()">SIGN UP</button>
+
+    <p class="bottom-text">
+      Already have an account ?
+      <span onclick="showLogin()">Log In Here</span>
+    </p>
+  </div>
+
+</div> <!-- ✅ signup properly closed -->
+
+<!-- ================= LOCATION SELECT PAGE ================= -->
+<div id="locationPage" class="page">
+
+  <div class="overlay"></div>
+
+  <div class="menu-btn">≡</div>
+
+  <div class="form-box">
+    <div class="check-icon">✔</div>
+
+    <h2>Choose Your Event Location</h2>
+    <p class="subtitle">
+      Select Your Desired Location In Which<br>
+      You Want To Organise/Find Your Event
+    </p>
+
+    <button class="btn main-btn" onclick="openSearchPage()">
+      📍 Location/Online
+    </button>
+
+    <button class="btn cancel-btn" onclick="goHome()">Cancel</button>
+  </div>
+</div>
+
+<!-- ================= LOCATION SEARCH PAGE ================= -->
+<div id="searchPage" class="page">
+
+  <div class="overlay"></div>
+
+  <div class="menu-btn">≡</div>
+
+  <div class="form-box">
+
+    <h2>Choose Your Event Location</h2>
+
+    <div class="search-box">
+      🔍
+      <input type="text" id="locationInput" placeholder="Search Location..." oninput="showSuggestions()">
+    </div>
+
+    <ul id="suggestions"></ul>
+
+    <button class="btn main-btn" onclick="saveLocation()">📍 Location Update</button>
+  </div>
+</div>
+
+<!-- ================= POPUP ================= -->
+<div id="popup" class="popup">Location Saved ✅</div>
+
+<!-- ================= DASHBOARD PAGE ================= -->
+<div id="dashboardPage" class="page">
+
+  <div class="overlay"></div>
+
+  <div class="dashboard-container">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="icon-btn" onclick="goHome()">←</div>
+
+      <input type="text" placeholder="find events in........" class="search-bar">
+
+      <div class="icon-btn">≡</div>
+    </div>
+
+    <!-- Location -->
+    <div class="location-text">
+      📍 <span id="userLocation">Location</span>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+      <button class="cat active">EVENT</button>
+      <button class="cat">MOVIES</button>
+      <button class="cat">FOOD</button>
+      <button class="cat">SPORTS</button>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+
+      <div class="card" onclick="openEventDetail()">
+        <img src="Summer fiesta.png">
+        <p>Summer Fiesta Event</p>
+      </div>
+
+      <div class="card">
+        <img src="Summer fiesta (1).png">
+        <p>Live Show Event</p>
+      </div>
+
+      <div class="card">
+        <img src="Summer fiesta (2).png">
+        <p>Music Event</p>
+      </div>
+
+      <div class="card more">
+        <p>MORE ITEMS →</p>
+      </div>
+
+    </div>
+
+    <!-- No Items -->
+    <div id="noItems" class="no-items">No Items Found</div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-icon">＋</div>
+      <div class="nav-icon">👤</div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

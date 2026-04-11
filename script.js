@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 const express = require("express");
 const cors = require("cors");
 
@@ -278,3 +279,200 @@ app.get("/my-events", authenticateToken, (req, res) => {
   });
 
 });
+=======
+// ================= PAGE NAVIGATION =================
+
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+}
+
+function showLogin() {
+  showPage("loginPage");
+}
+
+function showSignup() {
+  showPage("signupPage");
+}
+
+function goHome() {
+  showPage("homePage");
+}
+
+function goToLocation() {
+  showPage("locationPage");
+}
+
+function openSearchPage() {
+  showPage("searchPage");
+}
+
+
+// ================= SIGNUP =================
+
+function handleSignup() {
+  const inputs = document.querySelectorAll("#signupPage input");
+
+  const username = inputs[0].value.trim();
+  const email = inputs[1].value.trim();
+  const mobile = inputs[2].value.trim();
+  const password = inputs[3].value.trim();
+
+  if (!username || !email || !mobile || !password) {
+    alert("Please fill all fields ❗");
+    return;
+  }
+
+  const userData = {
+    username,
+    email,
+    mobile,
+    password
+  };
+
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  inputs.forEach(input => input.value = "");
+
+  // Direct login page
+  showLogin();
+}
+
+
+// ================= LOGIN =================
+
+function handleLogin() {
+  const inputs = document.querySelectorAll("#loginPage input");
+
+  const username = inputs[0].value.trim();
+  const password = inputs[1].value.trim();
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
+  if (!storedUser) {
+    alert("Please sign up first ❗");
+    return;
+  }
+
+  if (username === storedUser.username && password === storedUser.password) {
+    inputs.forEach(input => input.value = "");
+
+    // Go to location page
+    goToLocation();
+  } else {
+    alert("Invalid credentials ❌");
+  }
+}
+
+
+// ================= LOCATION SUGGESTIONS =================
+
+const locations = [
+  "Delhi, India",
+  "Mumbai, India",
+  "Bangalore, India",
+  "Jamshedpur, Jharkhand",
+  "New York, USA",
+  "London, UK",
+  "Paris, France",
+  "Tokyo, Japan",
+  "Dubai, UAE"
+];
+
+function showSuggestions() {
+  const input = document.getElementById("locationInput").value.toLowerCase();
+  const list = document.getElementById("suggestions");
+
+  list.innerHTML = "";
+
+  if (!input) return;
+
+  const filtered = locations.filter(loc =>
+    loc.toLowerCase().includes(input)
+  );
+
+  filtered.forEach(loc => {
+    const li = document.createElement("li");
+    li.textContent = loc;
+
+    li.onclick = () => {
+      document.getElementById("locationInput").value = loc;
+      list.innerHTML = "";
+    };
+
+    list.appendChild(li);
+  });
+}
+
+
+// ================= SAVE LOCATION =================
+
+function saveLocation() {
+  const location = document.getElementById("locationInput").value;
+
+  if (!location) {
+    alert("Please select a location ❗");
+    return;
+  }
+
+  // Save location
+  localStorage.setItem("selectedLocation", location);
+
+  // 👉 YAHAN TAK FLOW KHATAM THA (Dashboard se pehle)
+  alert("Location Saved ✅");
+
+  // Optional: go back home
+  goHome();
+}
+// ================= DASHBOARD =================
+
+function goToDashboard() {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("dashboardPage").classList.add("active");
+
+  const location = localStorage.getItem("selectedLocation");
+  if (location) {
+    document.getElementById("userLocation").innerText = location;
+  }
+}
+
+// SAVE LOCATION UPDATE (IMPORTANT)
+function saveLocation() {
+  const location = document.getElementById("locationInput").value;
+
+  if (!location) {
+    alert("Please select location ❗");
+    return;
+  }
+
+  localStorage.setItem("selectedLocation", location);
+
+  // 👉 DIRECT DASHBOARD
+  goToDashboard();
+}
+
+
+// CATEGORY FILTER
+document.addEventListener("DOMContentLoaded", () => {
+  const cats = document.querySelectorAll(".cat");
+  const cards = document.querySelector(".cards");
+  const noItems = document.getElementById("noItems");
+
+  cats.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+      cats.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      if (btn.innerText === "EVENT") {
+        cards.style.display = "grid";
+        noItems.style.display = "none";
+      } else {
+        cards.style.display = "none";
+        noItems.style.display = "block";
+      }
+
+    });
+  });
+});
+>>>>>>> b904771 (ADDING FRONTEND)
